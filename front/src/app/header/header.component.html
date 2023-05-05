@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg" [ngClass]="{ affix: scrolled }">
+  <div class="container-fluid col justify-content-center" id="flex">
+    <a class="navbar-brand text-white" routerLink="">Blog</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+    <div
+      class="text-primary collapse navbar-collapse justify-content-end text-white"
+      id="navbarSupportedContent"
+    >
+      <a routerLink="home/create-post" class="btn" (click)="close.click()"
+        >Create Post</a
+      >
+    </div>
+  </div>
+
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    #close
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>

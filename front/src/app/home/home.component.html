@@ -1,0 +1,130 @@
+<section id="welcome">
+  <div>
+    <h1>Welcome to Blog Home!</h1>
+    <a class="btn" routerLink="login">Get Started!</a>
+  </div>
+  <div>
+    <img
+      src="https://www.vhv.rs/dpng/d/125-1251032_money-blogging-write-a-blog-post-png-transparent.png"
+      alt=""
+      class="img-fluid"
+    />
+  </div>
+</section>
+
+<section class="" id="featured">
+  <div class="row justify-content-between">
+    <div class="col-lg-7">
+      <!-- <div class="card">
+        <img
+          src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
+          class="card-img-top border img-fluid"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+        </div>
+      </div> -->
+      <div class="card mb-4">
+        <a routerLink="view-post"
+          ><img
+            class="card-img-top"
+            src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg"
+            alt="..."
+          />
+          <div class="card-body">
+            <div class="small text-muted" id="date">January 1, 2023</div>
+            <h2 class="card-title" id="title">Featured Post Title</h2>
+            <p class="card-text">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a
+              laboriosam. Dicta expedita corporis animi vero voluptate
+              voluptatibus possimus, veniam magni quis!
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <!-- Search widget-->
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex searchbox">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Search the Blog"
+              aria-label="Search the Blog"
+              aria-describedby="button-search"
+              #searchText
+            />
+            <button
+              class="btn btn-success"
+              id="button-search"
+              type="button"
+              (click)="redirectToSearch(searchText.value)"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Categories widget-->
+      <!-- <div class="card mb-4">
+        <div class="card-header">Categories</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="list-unstyled mb-0">
+                <li><a href="#!">Web Design</a></li>
+                <li><a href="#!">HTML</a></li>
+                <li><a href="#!">Freebies</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="list-unstyled mb-0">
+                <li><a href="#!">JavaScript</a></li>
+                <li><a href="#!">CSS</a></li>
+                <li><a href="#!">Tutorials</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- Side widget-->
+      <div class="card mb-4">
+        <div class="card-header">Side Widget</div>
+        <div class="card-body">
+          You can put anything you want inside of these side widgets. They are
+          easy to use, and feature the Bootstrap 5 card component!
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="" id="blogsdisplay">
+  <h3>Browse the Blog</h3>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8]">
+      <a routerLink="view-post">
+        <div class="card">
+          <img src="" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>

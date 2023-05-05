@@ -1,0 +1,26 @@
+<section class="searchbar">
+  <div class="d-flex searchbox">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Search the Blog"
+      aria-label="Search the Blog"
+      aria-describedby="button-search"
+      #searchText
+    />
+    <button
+      class="btn btn-success"
+      id="button-search"
+      type="button"
+      (click)="searchBlog(searchText.value)"
+    >
+      Search
+    </button>
+  </div>
+  <!-- showing results -->
+  <div class="text-center mt-2 p-1" id="showingResults" *ngIf="showResults">
+    <span class=""> Showing results for </span>
+    <br />
+    <h4>{{ searchTerm }}</h4>
+  </div>
+</section>

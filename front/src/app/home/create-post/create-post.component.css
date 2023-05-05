@@ -1,0 +1,21 @@
+#writeBlog {
+  padding-top: 6%;
+}
+
+input,
+textarea {
+  max-width: 70%;
+}
+
+.title {
+  font-size: 25px;
+}
+
+.text-contents {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  /* grid-template-columns: auto; */
+  justify-content: center;
+  align-items: center;
+}

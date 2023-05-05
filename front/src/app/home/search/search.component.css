@@ -1,0 +1,23 @@
+.searchbar {
+  padding-top: 4%;
+}
+
+.searchbox {
+  padding-inline: 20%;
+}
+
+/* To create the merged feeling */
+.searchbar input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.searchbar button {
+  margin-left: -1px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+#showingResults {
+  background-color: rgb(229, 243, 220);
+}
