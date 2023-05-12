@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -18,6 +18,9 @@ export class RegisterComponent {
   ) {}
   ngOnInit() {
     document.body.style.background = 'rgb(0, 104, 74)';
+    if (localStorage.getItem('token')) {
+      this.registerRouter.navigateByUrl('');
+    }
   }
 
   ngOnDestroy(): void {
@@ -42,13 +45,16 @@ export class RegisterComponent {
       let password = this.registerForm.value.password;
       this.api.register(name, username, password).subscribe(
         (result: any) => {
-          this.registerSuccessMsg = result.message;
+          this.registerSuccessMsg = result;
+          // alert(this.registerSuccessMsg);
           setTimeout(() => {
             this.registerRouter.navigateByUrl('login');
+            this.registerSuccessMsg = '';
           }, 3000);
         },
         (result: any) => {
-          this.registerErrorMsg = result.error.message;
+          this.registerErrorMsg = result.error;
+          alert(this.registerErrorMsg);
           setTimeout(() => {
             this.registerForm.reset();
             this.registerErrorMsg = '';

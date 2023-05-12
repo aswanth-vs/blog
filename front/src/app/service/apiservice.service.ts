@@ -10,8 +10,16 @@ const options = {
   providedIn: 'root',
 })
 export class ApiserviceService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // this.getPost().subscribe((data: any) => {
+    //   console.log('Testing inside getPost');
+    //   console.log(data);
+    //   this.allPosts.next(data);
+    // });
+  }
   searchTerm = new BehaviorSubject('');
+
+  // allPosts = new BehaviorSubject([]);
 
   BASE_URL = 'http://localhost:3000';
 
@@ -56,11 +64,22 @@ export class ApiserviceService {
         text: blog.content.text,
         images: blog.content.images,
       },
+      tags: blog.tags,
     };
     return this.http.post(
       `${this.BASE_URL}/home/create-post`,
       body,
       this.appendToken()
     );
+  }
+
+  //get all posts
+  getPost() {
+    return this.http.get(`${this.BASE_URL}/home/all-posts`);
+  }
+
+  //view post
+  viewpost(id: any) {
+    return this.http.get(`${this.BASE_URL}/home/view-post/${id}`);
   }
 }

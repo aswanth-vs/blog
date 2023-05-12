@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiserviceService } from '../service/apiservice.service';
 
@@ -7,8 +7,20 @@ import { ApiserviceService } from '../service/apiservice.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
-  constructor(private router: Router, private api: ApiserviceService) {}
+export class HomeComponent implements OnInit {
+  constructor(private router: Router, private api: ApiserviceService) {
+    console.log('Testing');
+
+    this.api.getPost().subscribe((data: any) => {
+      console.log('Testing inside getPost');
+      console.log(data);
+      this.allPosts = data;
+    });
+  }
+
+  allPosts: any = [];
+
+  ngOnInit() {}
   redirectToSearch(text: any) {
     console.log(text);
     if (text) {

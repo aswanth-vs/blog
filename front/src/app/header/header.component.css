@@ -8,10 +8,21 @@
   }
 }
 
+@media (max-width: 991px) {
+  .nav_anchor {
+    border: 1px #e8f0e6 solid;
+    color: black !important;
+    background-color: #e8f0e6;
+    margin-right: 10px;
+  }
+}
+
 nav {
   display: flex !important;
   align-items: flex-start;
   background-color: rgb(0, 104, 74);
+  backdrop-filter: blur(0.1px);
+  -webkit-backdrop-filter: blur(8px);
 
   position: fixed;
   width: 100%;
@@ -35,12 +46,13 @@ button > span {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.btn {
+.nav_anchor {
   text-decoration: none;
   color: #fff;
+  margin-right: 4px;
 }
 
-.btn:hover {
+.nav_anchor:hover {
   border: 1px #e8f0e6 solid;
   background-color: #e8f0e6;
   color: black;

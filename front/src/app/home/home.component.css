@@ -17,22 +17,25 @@ h1 {
 }
 
 #welcome {
-  /* padding-top: 5%; */
+  padding-top: 5%;
   /* padding-inline: 0; */
   color: #e8f0e6;
   /* border-color: rgb(0, 104, 74); */
   background-color: rgb(0, 104, 74);
 
-  height: 50dvh;
+  /* height: 50dvh; */
   display: grid;
   grid-template-columns: auto auto;
   place-items: center;
+  padding-bottom: 40px;
 }
 
 #welcome img {
   object-fit: contain;
-  height: 300px;
-  mix-blend-mode: color-burn;
+  /* width: 100%; */
+  height: 400px;
+  /* border-radius: 200px; */
+  border-radius: max(0px, min(200px, (100% - 400px + 1px) * 9999)) / 200px;
 }
 
 #welcome a {
@@ -92,4 +95,35 @@ a {
 
 #blogsdisplay .row > div:hover {
   transform: translateY(-10px);
+}
+
+@media (max-width: 870px) {
+  #welcome {
+    grid-template-columns: 0.8fr auto;
+  }
+}
+
+@media (max-width: 680px) {
+  #welcome {
+    grid-template-columns: 1fr;
+    padding-top: 8%;
+    height: 100dvh;
+  }
+
+  .welcome_text {
+    margin-bottom: 1em;
+    text-align: center;
+  }
+}
+
+@media (max-width: 454px) {
+  #welcome img {
+    /* width: 60%; */
+    /* border-radius: 50%; */
+    /* border-radius: max(0px, min(50%, (100% - 100% + 1px) * 9999)) / 50%; */
+  }
+
+  .welcome_image {
+    text-align: center;
+  }
 }

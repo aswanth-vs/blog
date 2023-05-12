@@ -43,7 +43,12 @@ router.post("/home/register", accountController.register);
 router.post("/home/login", accountController.login);
 
 //create post
-
 router.post("/home/create-post", jwtMiddleware, pendingpostController.createPost);
+
+//all-posts
+router.get("/home/all-posts", pendingpostController.getPosts);
+
+//view-post
+router.get("/home/view-post/:id", pendingpostController.viewPost);
 
 module.exports = router;

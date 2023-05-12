@@ -1,16 +1,16 @@
+<!--  -->
+
 <section id="welcome">
-  <div>
+  <div class="welcome_text">
     <h1>Welcome to Blog Home!</h1>
     <a class="btn" routerLink="login">Get Started!</a>
   </div>
-  <div>
-    <img
-      src="https://www.vhv.rs/dpng/d/125-1251032_money-blogging-write-a-blog-post-png-transparent.png"
-      alt=""
-      class="img-fluid"
-    />
+  <div class="welcome_image">
+    <img [src]="'assets/hero1.jpg'" alt="" class="img-fluid" />
   </div>
 </section>
+
+<!-- https://www.vhv.rs/dpng/d/125-1251032_money-blogging-write-a-blog-post-png-transparent.png -->
 
 <section class="" id="featured">
   <div class="row justify-content-between">
@@ -111,17 +111,19 @@
 <section class="" id="blogsdisplay">
   <h3>Browse the Blog</h3>
   <div class="row">
-    <div class="col-md-4" *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8]">
-      <a routerLink="view-post">
+    <div class="col-md-4" *ngFor="let post of allPosts">
+      <!-- <div class="col-md-4" *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8]"> -->
+      <a routerLink="view-post/{{ post.uniqueId }}">
         <div class="card">
-          <img src="" class="card-img-top" alt="..." />
+          <img [src]="post.banner.data" class="card-img-top" alt="..." />
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p>
+              {{ post.author }}
             </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <p class="card-text">
+              {{ post.date }}
+            </p>
           </div>
         </div>
       </a>

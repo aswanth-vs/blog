@@ -1,3 +1,7 @@
+.main {
+  height: 100dvh;
+}
+
 section {
   /* min-height: 80vh; */
   padding-top: 10%;
@@ -22,13 +26,16 @@ section {
 }
 
 .right {
-  background-color: aliceblue;
-
   width: 100%;
   max-width: 65%;
 
   border-radius: 10px;
   padding: 15px;
+}
+
+.loginSuccess {
+  color: white;
+  font-size: 1.5rem;
 }
 
 @media (max-width: 1000px) {

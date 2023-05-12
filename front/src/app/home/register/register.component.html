@@ -1,13 +1,19 @@
+<!--  -->
 <section class="main">
   <div class="grid">
     <div class="left">
       <div>
         <h1>Welcome!</h1>
-        <h2>Please Login to Blog!</h2>
+        <h2>Please Register to Continue</h2>
       </div>
     </div>
-    <div class="right">
-      <div>
+
+    <div
+      class="right"
+      *ngIf="!registerSuccessMsg"
+      style="background-color: aliceblue"
+    >
+      <div class="registerPending">
         <form [formGroup]="registerForm" action="" (ngSubmit)="register()">
           <div class="form-floating mb-3">
             <input
@@ -87,6 +93,12 @@
         <div class="text-center">
           <a routerLink="../login">Login</a>
         </div>
+      </div>
+    </div>
+    <div *ngIf="registerSuccessMsg" class="right registerSuccess" id="">
+      Account Created, Redirecting to Login
+      <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
     </div>
   </div>

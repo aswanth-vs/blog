@@ -5,6 +5,7 @@ import {
   FormControl,
   Validators,
   FormBuilder,
+  FormArray,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiserviceService } from 'src/app/service/apiservice.service';
@@ -19,29 +20,51 @@ export class CreatePostComponent implements OnInit {
   // @ViewChild('closebutton')
   // closebutton!: ElementRef<HTMLElement>;
 
-  bannerimageSrc: string = '';
-  bannerimageName: string = '';
-  urlFile: string = '';
-  images: any = [];
-  currentUser: any = '';
-  testing: string = '';
-
-  myForm = this.fb.group({
-    title: [''],
-    content: [''],
-    file: [''],
-  });
-
-  content: any = '';
-  textarea: any = '';
-  test: any = '';
-
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
     private api: ApiserviceService,
     private router: Router
   ) {}
+
+  bannerimageSrc: string = '';
+  bannerimageName: string = '';
+  urlFile: string = '';
+  images: any = [];
+  currentUser: any = '';
+  testing: string = '';
+  tagsFinal: any = [];
+
+  myForm = this.fb.group({
+    title: [''],
+    content: [''],
+    file: [''],
+    tag: this.fb.array([]),
+    temp: [''],
+  });
+
+  tags: any = [
+    { id: 1, name: 'Food', code: 'ANG' },
+    { id: 2, name: 'Travel', code: 'NOD' },
+    { id: 3, name: 'News', code: 'REA' },
+    { id: 4, name: 'Technology', code: 'VUE' },
+    { id: 5, name: 'Science', code: 'JQU' },
+    { id: 6, name: 'Lifestyle', code: 'ANG' },
+    { id: 7, name: 'Music', code: 'NOD' },
+    { id: 8, name: 'Sports', code: 'REA' },
+    { id: 9, name: 'Finance', code: 'VUE' },
+    { id: 10, name: 'Politics', code: 'JQU' },
+    { id: 11, name: 'Business', code: 'ANG' },
+    { id: 12, name: 'Art', code: 'NOD' },
+    { id: 13, name: 'Culture', code: 'REA' },
+    { id: 14, name: 'Religion', code: 'VUE' },
+    { id: 15, name: 'Health and Fitness', code: 'JQU' },
+  ];
+
+  content: any = '';
+  textarea: any = '';
+  test: any = '';
+
   ngOnInit(): void {
     if (!localStorage.getItem('token')) {
       alert('Please Login');
@@ -55,6 +78,21 @@ export class CreatePostComponent implements OnInit {
   // get f() {
   //   return this.myForm.controls;
   // }
+
+  // checkbox
+  controlOnChange(event: any) {
+    const tags: FormArray = this.myForm.get('tag') as FormArray;
+
+    if (event.target.checked) {
+      tags.push(new FormControl(event.target.value));
+      // this.selectedCheckBoxList.push(event.target.value);
+    } else {
+      const index = tags.controls.findIndex(
+        (tag) => tag.value === event.target.value
+      );
+      tags.removeAt(index);
+    }
+  }
 
   uploadBannerImage(event: any) {
     const reader = new FileReader();
@@ -70,8 +108,6 @@ export class CreatePostComponent implements OnInit {
         this.bannerimageSrc = reader.result as string;
         // console.log(reader.result);
       };
-
-      // this.textarea += `(img:${file.name})`;
     }
   }
 
@@ -83,7 +119,7 @@ export class CreatePostComponent implements OnInit {
       const filename = file.name;
       console.log(filename);
 
-      console.log('File: ', file);
+      // console.log('File: ', file);
 
       reader.readAsDataURL(file);
 
@@ -95,26 +131,31 @@ export class CreatePostComponent implements OnInit {
         // this.testing = reader.result as string;
       };
 
-      this.textarea += `[${file.name}]`;
+      this.textarea += `<|${file.name}|>`;
       // this.test += `<br />[${file.name}]`;
     }
-    console.log(this.images);
+    // console.log(this.images);
   }
 
   urlUpload(event: any) {
-    console.log(event.value);
+    // console.log(event.value);
     this.bannerimageSrc = event.value;
   }
 
   submitBlog() {
-    if (this.myForm.valid) {
-      // const date = new Date();
-      // console.log('Date', date);
+    console.log(this.myForm.value.tag);
 
-      console.log(this.myForm.value);
+    if (this.myForm.valid) {
+      this.myForm.value.tag?.forEach((tag: any) => {
+        this.tagsFinal.push({
+          tag,
+        });
+      });
       this.content = this.myForm.value.content;
       this.content = this.content.replace(/\n/g, '<br />');
       this.test = this.content;
+      console.log('testing', this.content);
+
       const blog = {
         title: this.myForm.value.title,
         banner: {
@@ -125,17 +166,22 @@ export class CreatePostComponent implements OnInit {
           text: this.myForm.value.content,
           images: this.images,
         },
+        tags: this.tagsFinal,
       };
+      console.log(blog);
+
       this.api.createPost(this.currentUser, blog).subscribe(
         (result: any) => {
           alert('Posted');
+          this.clearAll();
         },
         // 400
         (result: any) => {
-          console.log(result.error);
+          alert(result.error);
+          // console.log(result.error);
         }
       );
-      console.log(blog);
+      // console.log(blog);
     } else {
       alert('Please fill out all fields');
     }

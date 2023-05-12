@@ -25,7 +25,6 @@
         id="file"
         type="file"
         accept="image/jpeg, image/png"
-        class="form-control"
         (change)="uploadBannerImage($event)"
         #uploadFile
         required
@@ -44,11 +43,6 @@
       >
         Select a Banner Image
       </button>
-
-      <!-- clear the selected image -->
-      <!-- <button class="btn btn-danger" type="button" (click)="clearAll()">
-          Clear
-        </button> -->
     </div>
 
     <!-- Title -->
@@ -62,6 +56,21 @@
         placeholder="Title"
         required
       />
+      <!-- Tag selection -->
+      <div class="tag-label">Tags</div>
+      <div class="tags">
+        <div *ngFor="let tag of tags" class="m-1 mt-0">
+          <input
+            type="checkbox"
+            [value]="tag.name"
+            formControlName="temp"
+            (change)="controlOnChange($event)"
+          />
+          {{ tag.name }}
+        </div>
+      </div>
+
+      <!--  -->
 
       <!-- Blog Content -->
       <textarea
@@ -78,11 +87,12 @@
       ></textarea>
       <!-- </div> -->
     </div>
+
     <div class="text-center mt-3">
       <button class="btn btn-success me-3">Submit</button>
       <!-- Upload Images -->
       <button
-        class="btn"
+        class="btn me-3"
         type="button"
         (click)="uploadImages.click()"
         style="background-color: #0050b6; color: #e8f0e6"
@@ -97,6 +107,9 @@
         (change)="uploadImage($event)"
         #uploadImages
       />
+      <button class="btn btn-warning" (click)="clearAll()" type="button">
+        Clear All
+      </button>
     </div>
   </form>
 </section>

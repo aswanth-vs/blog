@@ -1,3 +1,4 @@
+<!--  -->
 <section class="main">
   <div class="grid">
     <div class="left">
@@ -6,7 +7,11 @@
         <h2>Please Login to Blog!</h2>
       </div>
     </div>
-    <div class="right">
+    <div
+      class="right"
+      *ngIf="!loginSuccessMsg"
+      style="background-color: aliceblue"
+    >
       <div>
         <form [formGroup]="loginForm" action="" (ngSubmit)="login()">
           <!--  -->
@@ -64,6 +69,13 @@
         <div class="text-center">
           <a routerLink="../register">Register</a>
         </div>
+      </div>
+    </div>
+    <!--  -->
+    <div *ngIf="loginSuccessMsg" class="right loginSuccess" id="">
+      Login Successful, Please Wait...
+      <div class="spinner-border text-light" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
     </div>
   </div>

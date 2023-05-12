@@ -21,3 +21,11 @@
 #showingResults {
   background-color: rgb(229, 243, 220);
 }
+
+.main {
+  height: 80dvh;
+}
+
+.row {
+  row-gap: 2em;
+}

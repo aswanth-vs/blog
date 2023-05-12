@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -18,6 +18,9 @@ export class LoginComponent implements OnInit {
   ) {}
   ngOnInit() {
     document.body.style.background = 'rgb(0, 104, 74)';
+    if (localStorage.getItem('token')) {
+      this.loginRouter.navigateByUrl('');
+    }
   }
 
   ngOnDestroy(): void {
@@ -43,17 +46,19 @@ export class LoginComponent implements OnInit {
       let password = this.loginForm.value.password;
       this.api.login(username, password).subscribe(
         (result: any) => {
-          // this.loginSuccessMsg = result.message;
+          this.loginSuccessMsg = result;
           // localStorage.setItem('currentUser', result.currentUser);
           //store token in local storage
           localStorage.setItem('token', result.token);
           localStorage.setItem('username', username);
           setTimeout(() => {
             this.loginRouter.navigateByUrl('');
+            this.loginSuccessMsg = '';
           }, 3000);
         },
         (result: any) => {
-          this.loginErrorMsg = result.error.message;
+          this.loginErrorMsg = result.error;
+          alert(this.loginErrorMsg);
           setTimeout(() => {
             this.loginForm.reset();
             this.loginErrorMsg = '';

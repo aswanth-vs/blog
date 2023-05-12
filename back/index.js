@@ -20,7 +20,7 @@ const router = require("./routes/router");
 const server = express();
 
 //to store port number
-const PORT = 3000;
+const PORT = 3000 || process.env.PORT;
 
 //use in server app
 server.use(cors());
@@ -42,3 +42,7 @@ server.listen(PORT, () => {
 // server.get("/", (req, res) => {
 //   res.send("Lol");
 // });
+
+//  "scripts": {
+//     "test": "echo \"Error: no test specified\" && exit 1"
+//   },

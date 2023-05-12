@@ -23,7 +23,7 @@ const routes: Routes = [
     component: SearchComponent,
   },
   {
-    path: 'view-post',
+    path: 'view-post/:id',
     component: ViewPostComponent,
   },
   { path: 'create-post', component: CreatePostComponent },

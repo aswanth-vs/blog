@@ -4,16 +4,37 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
     <div
-      class="text-primary collapse navbar-collapse justify-content-end text-white"
+      class="text-primary collapse navbar-collapse justify-content-end text-white navbar_links"
       id="navbarSupportedContent"
     >
-      <a routerLink="home/create-post" class="btn" (click)="close.click()"
+      <a
+        routerLink="home/create-post"
+        class="nav_anchor btn"
+        (click)="close.click()"
         >Create Post</a
       >
+      <button
+        *ngIf="!loggedIn"
+        routerLink="home/login"
+        class="nav_anchor btn"
+        (click)="close.click()"
+      >
+        Login
+      </button>
+      <button
+        *ngIf="loggedIn"
+        routerLink="home/create-post"
+        class="nav_anchor btn"
+        (click)="close.click()"
+        (click)="logout()"
+      >
+        Logout
+      </button>
     </div>
   </div>
 
   <button
+    id="navbar_button"
     class="navbar-toggler"
     type="button"
     data-bs-toggle="collapse"
@@ -26,3 +47,4 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 </nav>
+<div style="padding-bottom: 50px"></div>
