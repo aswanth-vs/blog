@@ -28,6 +28,7 @@ export class ViewPostComponent implements OnInit {
         this.content = this.post.content.text;
         this.formatContentText(this.content);
         this.tags = this.post.tags;
+        this.finishLoading = true;
       },
       //400
       (result: any) => {
@@ -41,6 +42,8 @@ export class ViewPostComponent implements OnInit {
   content: any = '';
   contentFinal: any = '';
   tags: any = [];
+  //to show that the data is being loaded
+  finishLoading: Boolean = false;
 
   formatContentText(data: any) {
     //splitting the data based on line breaks and () [images, headings]

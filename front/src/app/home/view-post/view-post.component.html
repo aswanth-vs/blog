@@ -1,6 +1,6 @@
 <!-- Post content-->
 <section class="main">
-  <div class="row">
+  <div class="row" *ngIf="finishLoading">
     <div class="col-md-2 col-sm-1"></div>
     <div class="col-md-8 col-sm-10">
       <!--  -->
@@ -48,4 +48,12 @@
     <div class="col-md-2 col-sm-1"></div>
   </div>
   <!--  -->
+  <div *ngIf="!finishLoading" class="mb-5 postLoading">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span style="font-size: 1.1em" class="ms-3"
+      >Loading Post...Please Wait</span
+    >
+  </div>
 </section>

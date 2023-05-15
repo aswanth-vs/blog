@@ -23,10 +23,10 @@
       </button>
       <button
         *ngIf="loggedIn"
-        routerLink="home/create-post"
         class="nav_anchor btn"
         (click)="close.click()"
-        (click)="logout()"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
       >
         Logout
       </button>
@@ -48,3 +48,49 @@
   </button>
 </nav>
 <div style="padding-bottom: 50px"></div>
+
+<!-- Logout Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+          Confirm Logout
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #closeModal
+        ></button>
+      </div>
+
+      <div class="modal-footer d-flex justify-content-center">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="closeModal.click()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

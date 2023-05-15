@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', result.token);
           localStorage.setItem('username', username);
           setTimeout(() => {
+              window.location.reload();
             this.loginRouter.navigateByUrl('');
             this.loginSuccessMsg = '';
           }, 3000);

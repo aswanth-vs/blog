@@ -28,6 +28,12 @@ span {
   font-size: 1.1rem;
 }
 
+.postLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* .display_section > div {
    width: 800px;
 } */

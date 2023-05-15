@@ -9,14 +9,14 @@
         aria-describedby="button-search"
         #searchText
       />
-      <button
+      <!-- <button
         class="btn btn-success"
         id="button-search"
         type="button"
         (click)="searchBlog(searchText.value)"
       >
         Search
-      </button>
+      </button> -->
     </div>
     <!-- showing results -->
     <div class="text-center mt-2 p-1" id="showingResults" *ngIf="showResults">
@@ -26,14 +26,42 @@
     </div>
   </section>
 
+  <section class="filter">
+    <button class="btn" (click)="showFilter()">
+      Filters <i class="fa-solid fa-angle-down" *ngIf="showTags"></i
+      ><i class="fa-solid fa-angle-up" *ngIf="!showTags"></i>
+    </button>
+    <form [formGroup]="myForm" *ngIf="showTags">
+      <!-- Tag selection -->
+      <!-- <div class="tag-label">Tags</div> -->
+      <div class="tags">
+        <div *ngFor="let tag of tags" class="m-1 mt-0">
+          <input
+            type="checkbox"
+            [value]="tag.name"
+            formControlName="temp"
+            (change)="controlOnChange($event)"
+          />
+          {{ tag.name }}
+        </div>
+      </div>
+    </form>
+  </section>
+
   <section class="search_result">
-    <div class="row" *ngIf="showResults">
+    <div class="row" *ngIf="!finishLoading && showResults">
       <div class="col-md-3" *ngFor="let blog of currentPosts">
         <div class="card card-body bg-light">
           <h2>{{ blog.title }}</h2>
           <p></p>
         </div>
       </div>
+    </div>
+    <div *ngIf="!finishLoading" class="m-5 d-flex justify-content-center">
+      <div class="spinner-border text-dark" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <span style="font-size: 1.1em" class="ms-3">Loading</span>
     </div>
   </section>
 </section>

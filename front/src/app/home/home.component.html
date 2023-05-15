@@ -14,7 +14,7 @@
 
 <section class="" id="featured">
   <div class="row justify-content-between">
-    <div class="col-lg-7">
+    <div class="col-lg-7" *ngIf="featuredLoading">
       <!-- <div class="card">
         <img
           src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
@@ -30,24 +30,33 @@
         </div>
       </div> -->
       <div class="card mb-4">
-        <a routerLink="view-post"
+        <a routerLink="view-post/{{ featuredPost.uniqueId }}"
           ><img
             class="card-img-top"
-            src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg"
-            alt="..."
+            [src]="featuredPost.banner.data"
+            [alt]="featuredPost.banner.name"
           />
           <div class="card-body">
-            <div class="small text-muted" id="date">January 1, 2023</div>
-            <h2 class="card-title" id="title">Featured Post Title</h2>
+            <h2 class="card-title" id="title">{{ featuredPost.title }}</h2>
+            <p>
+              {{ featuredPost.author }}
+            </p>
+            <p class="card-text text-muted fst-italic">
+              {{ featuredPost.date }}
+            </p>
             <p class="card-text">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a
-              laboriosam. Dicta expedita corporis animi vero voluptate
-              voluptatibus possimus, veniam magni quis!
+              {{ featuredPost.content.text.slice(0, 220) }}...
             </p>
           </div>
         </a>
       </div>
+    </div>
+
+    <div class="col-lg-7" *ngIf="!featuredLoading">
+      <div class="spinner-border text-dark" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <span style="font-size: 1.1em" class="ms-3">Loading Featured Post</span>
     </div>
 
     <div class="col-lg-4">
@@ -97,13 +106,13 @@
         </div>
       </div> -->
       <!-- Side widget-->
-      <div class="card mb-4">
+      <!-- <div class="card mb-4">
         <div class="card-header">Side Widget</div>
         <div class="card-body">
           You can put anything you want inside of these side widgets. They are
           easy to use, and feature the Bootstrap 5 card component!
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </section>
@@ -121,12 +130,19 @@
             <p>
               {{ post.author }}
             </p>
-            <p class="card-text">
+            <p class="card-text text-muted fst-italic">
               {{ post.date }}
             </p>
+            <p>{{ post.content.text.slice(0, 110) }}...</p>
           </div>
         </div>
       </a>
     </div>
+  </div>
+  <div *ngIf="!finishLoading" class="mb-5">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span style="font-size: 1.1em" class="ms-3">Loading</span>
   </div>
 </section>
