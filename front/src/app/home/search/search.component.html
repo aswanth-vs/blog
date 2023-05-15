@@ -7,16 +7,17 @@
         placeholder="Search the Blog"
         aria-label="Search the Blog"
         aria-describedby="button-search"
-        #searchText
+        [(ngModel)]="searchKey"
+        #searchTerm
       />
-      <!-- <button
+      <button
         class="btn btn-success"
         id="button-search"
         type="button"
-        (click)="searchBlog(searchText.value)"
+        (click)="searchBlog()"
       >
         Search
-      </button> -->
+      </button>
     </div>
     <!-- showing results -->
     <div class="text-center mt-2 p-1" id="showingResults" *ngIf="showResults">
@@ -31,28 +32,29 @@
       Filters <i class="fa-solid fa-angle-down" *ngIf="showTags"></i
       ><i class="fa-solid fa-angle-up" *ngIf="!showTags"></i>
     </button>
-    <form [formGroup]="myForm" *ngIf="showTags">
-      <!-- Tag selection -->
-      <!-- <div class="tag-label">Tags</div> -->
-      <div class="tags">
-        <div *ngFor="let tag of tags" class="m-1 mt-0">
-          <input
-            type="checkbox"
-            [value]="tag.name"
-            formControlName="temp"
-            (change)="controlOnChange($event)"
-          />
-          {{ tag.name }}
-        </div>
+    <!-- <form [formGroup]="myForm" > -->
+    <!-- Tag selection -->
+    <!-- <div class="tag-label">Tags</div> -->
+    <div class="tags" *ngIf="showTags">
+      <div *ngFor="let tag of searchFilters" class="m-1 mt-0">
+        <input type="checkbox" [value]="tag.name" [(ngModel)]="tag.selected" />
+        {{ tag.name }}
+        <!-- (change)="controlOnChange($event)" -->
       </div>
-    </form>
+    </div>
+    <!-- </form> -->
+    <button class="btn" *ngIf="showTags" (click)="applyFilter()">
+      Apply Filters
+    </button>
   </section>
 
   <section class="search_result">
-    <div class="row" *ngIf="!finishLoading && showResults">
-      <div class="col-md-3" *ngFor="let blog of currentPosts">
+    <div class="row" *ngIf="finishLoading">
+      <!-- *ngFor="let blog of currentPosts -->
+      <div class="col-md-3" *ngFor="let posts of filteredPosts">
+        <!-- | filter : searchTerm : 'title' : selectedTags -->
         <div class="card card-body bg-light">
-          <h2>{{ blog.title }}</h2>
+          <h2>{{ posts.title }}</h2>
           <p></p>
         </div>
       </div>

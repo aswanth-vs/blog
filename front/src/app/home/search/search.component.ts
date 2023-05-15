@@ -14,22 +14,88 @@ export class SearchComponent implements OnInit {
   currentPosts: any = [];
   finishLoading: Boolean = false;
   showTags: Boolean = false;
+  selectedTags: any = [];
+  filteredPosts: any = [];
+  searchKey: any = '';
   tags: any = [
-    { id: 1, name: 'Food', code: 'ANG' },
-    { id: 2, name: 'Travel', code: 'NOD' },
-    { id: 3, name: 'News', code: 'REA' },
-    { id: 4, name: 'Technology', code: 'VUE' },
-    { id: 5, name: 'Science', code: 'JQU' },
-    { id: 6, name: 'Lifestyle', code: 'ANG' },
-    { id: 7, name: 'Music', code: 'NOD' },
-    { id: 8, name: 'Sports', code: 'REA' },
-    { id: 9, name: 'Finance', code: 'VUE' },
-    { id: 10, name: 'Politics', code: 'JQU' },
-    { id: 11, name: 'Business', code: 'ANG' },
-    { id: 12, name: 'Art', code: 'NOD' },
-    { id: 13, name: 'Culture', code: 'REA' },
-    { id: 14, name: 'Religion', code: 'VUE' },
-    { id: 15, name: 'Health and Fitness', code: 'JQU' },
+    { id: 1, name: 'Food' },
+    { id: 2, name: 'Travel' },
+    { id: 3, name: 'News' },
+    { id: 4, name: 'Technology' },
+    { id: 5, name: 'Science' },
+    { id: 6, name: 'Lifestyle' },
+    { id: 7, name: 'Music' },
+    { id: 8, name: 'Sports' },
+    { id: 9, name: 'Finance' },
+    { id: 10, name: 'Politics' },
+    { id: 11, name: 'Business' },
+    { id: 12, name: 'Art' },
+    { id: 13, name: 'Culture' },
+    { id: 14, name: 'Religion' },
+    { id: 15, name: 'Health and Fitness' },
+  ];
+
+  searchFilters: any = [
+    {
+      name: 'Food',
+      selected: false,
+    },
+    {
+      name: 'Travel',
+      selected: false,
+    },
+    {
+      name: 'News',
+      selected: false,
+    },
+    {
+      name: 'Technology',
+      selected: false,
+    },
+    {
+      name: 'Science',
+      selected: false,
+    },
+    {
+      name: 'Lifestyle',
+      selected: false,
+    },
+    {
+      name: 'Music',
+      selected: false,
+    },
+    {
+      name: 'Sports',
+      selected: false,
+    },
+    {
+      name: 'Finance',
+      selected: false,
+    },
+    {
+      name: 'Politics',
+      selected: false,
+    },
+    {
+      name: 'Business',
+      selected: false,
+    },
+    {
+      name: 'Art',
+      selected: false,
+    },
+    {
+      name: 'Culture',
+      selected: false,
+    },
+    {
+      name: 'Religion',
+      selected: false,
+    },
+    {
+      name: 'Health and Fitness',
+      selected: false,
+    },
   ];
 
   constructor(private api: ApiserviceService, private fb: FormBuilder) {}
@@ -40,7 +106,6 @@ export class SearchComponent implements OnInit {
       console.log(result);
       if (result) {
         this.showResults = true;
-        this.searchBlog(result);
       }
     });
 
@@ -49,48 +114,81 @@ export class SearchComponent implements OnInit {
       console.log(data);
       this.allPosts = data;
       this.finishLoading = true;
+      this.searchBlog();
     });
   }
-
-  myForm = this.fb.group({
-    tag: this.fb.array([]),
-    temp: [''],
-  });
 
   showFilter() {
     this.showTags = !this.showTags;
   }
 
-  searchBlog(text: any) {
-    if (text) {
-      this.currentPosts = [];
-      this.searchTerm = text;
-      this.showResults = true;
+  applyFilter() {
+    this.selectedTags = [];
+    this.searchFilters.forEach((i: any) => {
+      if (i.selected) {
+        !this.selectedTags.includes(i.name) && this.selectedTags.push(i.name);
+      }
+    });
+    console.log(this.selectedTags);
+    this.searchBlog();
+  }
+
+  searchBlog() {
+    this.filteredPosts = [];
+    let flag: any = 0;
+    console.log(this.searchKey);
+
+    if (this.searchKey == '') {
       this.allPosts.forEach((post: any) => {
-        if (
-          post.title
-            .trim()
-            .toLowerCase()
-            .includes(this.searchTerm.trim().toLowerCase())
-        ) {
-          this.currentPosts.push(post);
-        }
+        console.log(post.tags);
+
+        this.selectedTags.forEach((tag: any) => {
+          if (!post.tags.includes(tag)) {
+            flag = 1;
+          }
+        });
+        // for (const tag of this.selectedTags) {
+        //   if (!post.tags.includes(tag)) {
+        //     flag = 1;
+        //     break;
+        //   }
+        // }
+        flag == 0 && this.filteredPosts.push(post);
       });
+    } else {
+      for (const post of this.allPosts) {
+        let string = post.title.trim().split(' ').join(' ').toLowerCase();
+        if (
+          string.includes(
+            this.searchKey.trim().split(' ').join(' ').toLowerCase()
+          )
+        ) {
+          console.log(post.title);
+
+          for (const tag of this.selectedTags) {
+            if (!post.tags.includes(tag)) {
+              flag = 1;
+            }
+          }
+          flag == 0 && this.filteredPosts.push(post);
+        }
+      }
     }
+    console.log(this.filteredPosts);
   }
 
   // checkbox
-  controlOnChange(event: any) {
-    const tags: FormArray = this.myForm.get('tag') as FormArray;
+  // controlOnChange(event: any) {
+  //   const tags: FormArray = this.myForm.get('tag') as FormArray;
 
-    if (event.target.checked) {
-      tags.push(new FormControl(event.target.value));
-      // this.selectedCheckBoxList.push(event.target.value);
-    } else {
-      const index = tags.controls.findIndex(
-        (tag) => tag.value === event.target.value
-      );
-      tags.removeAt(index);
-    }
-  }
+  //   if (event.target.checked) {
+  //     tags.push(new FormControl(event.target.value));
+  //     // this.selectedTag.push(event.target.value);
+  //   } else {
+  //     const index = tags.controls.findIndex(
+  //       (tag) => tag.value === event.target.value
+  //     );
+  //     tags.removeAt(index);
+  //   }
+  // }
 }

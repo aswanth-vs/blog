@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ViewPostComponent } from './view-post/view-post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AccountComponent,
     ViewPostComponent,
     CreatePostComponent,
+    FilterPipe,
   ],
   imports: [
     CommonModule,

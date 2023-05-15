@@ -4,9 +4,12 @@
 }
 
 input,
-textarea,
-.tags {
+textarea {
   max-width: 70%;
+}
+
+.filter {
+  padding-inline: 20%;
 }
 
 .tag-label {

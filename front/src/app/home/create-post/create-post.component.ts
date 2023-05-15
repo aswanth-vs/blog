@@ -43,22 +43,85 @@ export class CreatePostComponent implements OnInit {
     temp: [''],
   });
 
+  // tags: any = [
+  //   { id: 1, name: 'Food', code: 'ANG' },
+  //   { id: 2, name: 'Travel', code: 'NOD' },
+  //   { id: 3, name: 'News', code: 'REA' },
+  //   { id: 4, name: 'Technology', code: 'VUE' },
+  //   { id: 5, name: 'Science', code: 'JQU' },
+  //   { id: 6, name: 'Lifestyle', code: 'ANG' },
+  //   { id: 7, name: 'Music', code: 'NOD' },
+  //   { id: 8, name: 'Sports', code: 'REA' },
+  //   { id: 9, name: 'Finance', code: 'VUE' },
+  //   { id: 10, name: 'Politics', code: 'JQU' },
+  //   { id: 11, name: 'Business', code: 'ANG' },
+  //   { id: 12, name: 'Art', code: 'NOD' },
+  //   { id: 13, name: 'Culture', code: 'REA' },
+  //   { id: 14, name: 'Religion', code: 'VUE' },
+  //   { id: 15, name: 'Health and Fitness', code: 'JQU' },
+  // ];
+
   tags: any = [
-    { id: 1, name: 'Food', code: 'ANG' },
-    { id: 2, name: 'Travel', code: 'NOD' },
-    { id: 3, name: 'News', code: 'REA' },
-    { id: 4, name: 'Technology', code: 'VUE' },
-    { id: 5, name: 'Science', code: 'JQU' },
-    { id: 6, name: 'Lifestyle', code: 'ANG' },
-    { id: 7, name: 'Music', code: 'NOD' },
-    { id: 8, name: 'Sports', code: 'REA' },
-    { id: 9, name: 'Finance', code: 'VUE' },
-    { id: 10, name: 'Politics', code: 'JQU' },
-    { id: 11, name: 'Business', code: 'ANG' },
-    { id: 12, name: 'Art', code: 'NOD' },
-    { id: 13, name: 'Culture', code: 'REA' },
-    { id: 14, name: 'Religion', code: 'VUE' },
-    { id: 15, name: 'Health and Fitness', code: 'JQU' },
+    {
+      name: 'Food',
+      selected: false,
+    },
+    {
+      name: 'Travel',
+      selected: false,
+    },
+    {
+      name: 'News',
+      selected: false,
+    },
+    {
+      name: 'Technology',
+      selected: false,
+    },
+    {
+      name: 'Science',
+      selected: false,
+    },
+    {
+      name: 'Lifestyle',
+      selected: false,
+    },
+    {
+      name: 'Music',
+      selected: false,
+    },
+    {
+      name: 'Sports',
+      selected: false,
+    },
+    {
+      name: 'Finance',
+      selected: false,
+    },
+    {
+      name: 'Politics',
+      selected: false,
+    },
+    {
+      name: 'Business',
+      selected: false,
+    },
+    {
+      name: 'Art',
+      selected: false,
+    },
+    {
+      name: 'Culture',
+      selected: false,
+    },
+    {
+      name: 'Religion',
+      selected: false,
+    },
+    {
+      name: 'Health and Fitness',
+      selected: false,
+    },
   ];
 
   content: any = '';
@@ -147,15 +210,24 @@ export class CreatePostComponent implements OnInit {
 
     if (this.myForm.valid) {
       this.myForm.value.tag?.forEach((tag: any) => {
-        this.tagsFinal.push({
-          tag,
-        });
+        this.tagsFinal.push(tag);
       });
       this.content = this.myForm.value.content;
       this.content = this.content.replace(/\n/g, '<br />');
       this.test = this.content;
       console.log('testing', this.content);
+      let selectedTags: any = [];
+      this.tags.forEach((i: any) => {
+        if (i.selected) {
+          !selectedTags.includes(i.name) && selectedTags.push(i.name);
+        }
+      });
+      console.log(selectedTags);
 
+      if (selectedTags.length < 1) {
+        alert('Select at Least One Tag');
+        return;
+      }
       const blog = {
         title: this.myForm.value.title,
         banner: {
@@ -166,7 +238,7 @@ export class CreatePostComponent implements OnInit {
           text: this.myForm.value.content,
           images: this.images,
         },
-        tags: this.tagsFinal,
+        tags: selectedTags,
       };
       console.log(blog);
 
@@ -191,6 +263,9 @@ export class CreatePostComponent implements OnInit {
     this.myForm.reset();
     this.bannerimageSrc = '';
     this.bannerimageName = '';
+    this.tags.forEach((tag: any) => {
+      tag.selected = false;
+    });
     // this.urlFile = '';
   }
 
