@@ -7,6 +7,7 @@ import { SearchComponent } from './search/search.component';
 import { ViewPostComponent } from './view-post/view-post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { AccountComponent } from './account/account.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'account',
     component: AccountComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
   },
 ];
 

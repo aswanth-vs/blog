@@ -1,1 +1,173 @@
-<p class="pt-5">Heee</p>
+<section id="main">
+  <div class="row">
+    <div class="col-md-3 text-center left">
+      <img
+        src="https://robohash.org/hicveldicta.png"
+        alt="profile picture"
+        id="user-image"
+        class="img-fluid"
+      />
+      <div>
+        <span>{{ username }}</span>
+      </div>
+    </div>
+    <!-- <div class="col-md-1"></div> -->
+    <div
+      *ngIf="!finishLoading"
+      class="m-5 d-flex justify-content-center align-items-center col-md-8 right"
+    >
+      <div class="spinner-border text-dark" role="status">
+        <span class="visually-hidden">Loading Posts...</span>
+      </div>
+      <span style="font-size: 1.1em" class="ms-3">Loading</span>
+    </div>
+    <div class="col-md-8 right" *ngIf="finishLoading">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            aria-current="page"
+            (click)="showPosts()"
+            [ngClass]="statusShowPosts ? 'active' : ''"
+            #allpostsbutton
+          >
+            All Posts
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            (click)="deletePostShow()"
+            #deletebutton
+            [ngClass]="statusDeletePosts ? 'active text-danger' : ''"
+          >
+            Delete Posts
+          </button>
+        </li>
+      </ul>
+      <!--  -->
+
+      <!--  -->
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let post of allPosts">
+          <div class="card mb-3">
+            <div class="row post-details no-gutters">
+              <div class="col-lg-4 col-sm-6 image-container">
+                <img
+                  [src]="post.banner.data"
+                  class="card-img img-fluid"
+                  alt="post-banner-image"
+                />
+              </div>
+              <div class="col-lg-8 col-sm-6 details-container">
+                <div class="card-body">
+                  <h5 class="card-title fw-normal">{{ post.title }}</h5>
+                  <p class="card-text description">
+                    {{ post.content.text.slice(0, 110) }}...
+                  </p>
+                  <p class="card-text">
+                    <small class="text-muted">{{ post.date | date }} </small>
+                  </p>
+                  <p *ngIf="adminLoggedIn">
+                    {{ post.author }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- delete post -->
+            <!-- <div  > -->
+
+            <!-- </div> -->
+          </div>
+          <!--  -->
+          <!-- <div id="deleteParent"> -->
+          <button
+            class="btn btn-danger mt-1 mb-4"
+            style="width: 100%"
+            (click)="deletePostInit(post.uniqueId, post.title)"
+            *ngIf="statusDeletePosts"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop2"
+          >
+            Delete <i class="fa fa-trash"></i>
+          </button>
+          <!-- delete confirm -->
+          <!-- <div
+              id="deleteConfirmDiv"
+              class="confirm-delete w3-animate-right hideElem"
+            >
+              Confirm Deletion?
+              <button
+                class="btn btn-danger"
+                (click)="deletePostConfirm(post.uniqueId)"
+              >
+                Yes
+              </button>
+              <button class="btn btn-primary" (click)="deletePostCancel()">
+                No
+              </button>
+            </div> -->
+          <!-- </div> -->
+          <!--  -->
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="py-5 bg-dark mt-3">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
+  </div>
+</footer>
+
+<!-- Post Deletion Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop2"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">
+          Confirm Deletion
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #closeModal
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <strong class="fs-5">{{ deletePostTitle }}</strong> - will be deleted!
+        </p>
+      </div>
+
+      <div class="modal-footer d-flex justify-content-center">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          (click)="confirmPostDeletion()"
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="closeModal.click()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

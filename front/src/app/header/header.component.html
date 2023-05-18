@@ -7,29 +7,42 @@
       class="text-primary collapse navbar-collapse justify-content-end text-white navbar_links"
       id="navbarSupportedContent"
     >
-      <a
-        routerLink="home/create-post"
-        class="nav_anchor btn"
-        (click)="close.click()"
-        >Create Post</a
-      >
-      <button
-        *ngIf="!loggedIn"
-        routerLink="home/login"
-        class="nav_anchor btn"
-        (click)="close.click()"
-      >
-        Login
-      </button>
-      <button
-        *ngIf="loggedIn"
-        class="nav_anchor btn"
-        (click)="close.click()"
-        data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
-      >
-        Logout
-      </button>
+      <div class="">
+        <a
+          routerLink="home/create-post"
+          class="nav_anchor btn"
+          (click)="close.click()"
+          >Create Post</a
+        >
+      </div>
+      <div>
+        <a
+          *ngIf="loggedIn"
+          routerLink="home/account"
+          class="nav_anchor btn"
+          (click)="close.click()"
+          >Account</a
+        >
+      </div>
+      <div>
+        <button
+          *ngIf="!loggedIn"
+          routerLink="home/login"
+          class="nav_anchor btn"
+          (click)="close.click()"
+        >
+          Login
+        </button>
+        <button
+          *ngIf="loggedIn"
+          class="nav_anchor btn"
+          (click)="close.click()"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   </div>
 
@@ -47,7 +60,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 </nav>
-<div style="padding-bottom: 50px"></div>
+<!-- <div style="padding-bottom: 50px"></div> -->
 
 <!-- Logout Modal -->
 <div

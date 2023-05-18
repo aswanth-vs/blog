@@ -1,41 +1,20 @@
 <!--  -->
 <section class="main">
   <div class="grid">
-    <div class="left">
+    <!-- <div class="left">
       <div>
         <h1>Welcome!</h1>
-        <h2>Please Register to Continue</h2>
+        <h2>Please Login to Blog!</h2>
       </div>
-    </div>
-
+    </div> -->
+    <h3 class="text-white">Admin Login</h3>
     <div
       class="right"
-      *ngIf="!registerSuccessMsg"
+      *ngIf="!loginSuccessMsg"
       style="background-color: aliceblue"
     >
-      <div class="registerPending">
-        <form [formGroup]="registerForm" action="" (ngSubmit)="register()">
-          <div class="form-floating mb-3">
-            <input
-              name="name"
-              formControlName="name"
-              type="text"
-              class="form-control"
-              id="floatingName"
-              placeholder="Name"
-              required
-            />
-            <label for="floatingName">Name</label>
-          </div>
-          <div
-            class="text-danger text-center mb-2"
-            *ngIf="
-              this.registerForm.get('name')?.errors &&
-              this.registerForm.get('name')?.touched
-            "
-          >
-            Invalid Name
-          </div>
+      <div>
+        <form [formGroup]="loginForm" action="" (ngSubmit)="login()">
           <!--  -->
           <div class="form-floating mb-3">
             <input
@@ -46,13 +25,13 @@
               placeholder="Username"
               required
             />
-            <label for="floatingUsername">Username</label>
+            <label for="floatingUsername">Admin</label>
           </div>
           <div
             class="text-danger text-center mb-2"
             *ngIf="
-              this.registerForm.get('username')?.errors &&
-              this.registerForm.get('username')?.touched
+              this.loginForm.get('username')?.errors &&
+              this.loginForm.get('username')?.touched
             "
           >
             Invalid Username
@@ -72,8 +51,8 @@
           <div
             class="text-danger text-center mb-2"
             *ngIf="
-              this.registerForm.get('password')?.errors &&
-              this.registerForm.get('password')?.touched
+              this.loginForm.get('password')?.errors &&
+              this.loginForm.get('password')?.touched
             "
           >
             Invalid Password
@@ -82,24 +61,17 @@
           <div></div>
           <!--  -->
           <div class="d-flex justify-content-center mt-5">
-            <button class="btn btn-success" type="submit">
-              Create Account
-            </button>
+            <button class="btn btn-success" type="submit">Login</button>
           </div>
         </form>
         <!--  -->
-        <div class="text-center m-3 fw-bold">OR</div>
+
         <!--  -->
-        <div class="text-center">
-          <a routerLink="../login">Login</a>
-        </div>
-        <div class="text-center mt-3">
-          <a routerLink="../admin">Login for Admin</a>
-        </div>
       </div>
     </div>
-    <div *ngIf="registerSuccessMsg" class="right registerSuccess" id="">
-      Account Created, Redirecting to Login
+    <!--  -->
+    <div *ngIf="loginSuccessMsg" class="right loginSuccess" id="">
+      Login Successful, Please Wait...
       <div class="spinner-border text-light" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>

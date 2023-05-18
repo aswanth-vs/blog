@@ -35,10 +35,13 @@ export class HeaderComponent implements OnInit {
   logout() {
     localStorage.removeItem('username');
     localStorage.removeItem('token');
+    if (localStorage.getItem('admin')) {
+      localStorage.removeItem('admin');
+    }
 
     setTimeout(() => {
-      window.location.reload();
       this.router.navigateByUrl('');
+      window.location.reload();
     }, 1000);
   }
 }

@@ -14,17 +14,26 @@
     color: black !important;
     background-color: #e8f0e6;
     margin-right: 10px;
+    margin-block: 3px;
+  }
+
+  .navbar_links div {
+    width: 100%;
+    display: flex;
+    justify-content: end;
   }
 }
 
 nav {
   display: flex !important;
   align-items: flex-start;
-  background-color: rgb(0, 104, 74);
+  /* background-color: rgb(0, 104, 74); */
+  background-color: rgba(53, 55, 60, 0.95);
   backdrop-filter: blur(0.1px);
   -webkit-backdrop-filter: blur(8px);
 
-  position: fixed;
+  position: sticky;
+  top: 0;
   width: 100%;
   z-index: 10;
 }

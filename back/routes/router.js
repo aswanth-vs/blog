@@ -7,6 +7,8 @@ const router = new express.Router();
 
 const accountController = require("../controllers/accountController");
 
+const adminController = require("../controllers/adminController");
+
 const pendingpostController = require("../controllers/pendingpostController");
 
 //import webtoken
@@ -50,5 +52,16 @@ router.get("/home/all-posts", pendingpostController.getPosts);
 
 //view-post
 router.get("/home/view-post/:id", pendingpostController.viewPost);
+
+//view user specific posts
+router.get("/home/all-posts/:username", jwtMiddleware, pendingpostController.getUserPosts);
+
+//delete post
+router.delete("/home/delete-post/:id", jwtMiddleware, pendingpostController.deletePost);
+
+// router.post("/home/admin", adminController.register);
+
+//admin login
+router.post("/home/admin", adminController.login);
 
 module.exports = router;

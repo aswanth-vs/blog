@@ -17,6 +17,16 @@ export class SearchComponent implements OnInit {
   selectedTags: any = [];
   filteredPosts: any = [];
   searchKey: any = '';
+
+  // _filterText: string = '';
+
+  // get filterText() {
+  //   return this._filterText;
+  // }
+
+  // set filterText(value: string) {
+  //   this._filterText = value;
+  // }
   tags: any = [
     { id: 1, name: 'Food' },
     { id: 2, name: 'Travel' },
@@ -134,30 +144,32 @@ export class SearchComponent implements OnInit {
   }
 
   searchBlog() {
+    // console.log(this._filterText);
+    // return;
     this.filteredPosts = [];
     let flag: any = 0;
-    console.log(this.searchKey);
-
     if (this.searchKey == '') {
-      this.allPosts.forEach((post: any) => {
-        console.log(post.tags);
+      console.log('Inside Empty');
 
-        this.selectedTags.forEach((tag: any) => {
-          if (!post.tags.includes(tag)) {
-            flag = 1;
-          }
+      this.filteredPosts = this.allPosts.filter((post: any) => {
+        return this.selectedTags.every((tag: any) => {
+          return post.tags.includes(tag);
         });
-        // for (const tag of this.selectedTags) {
-        //   if (!post.tags.includes(tag)) {
-        //     flag = 1;
-        //     break;
-        //   }
-        // }
-        flag == 0 && this.filteredPosts.push(post);
       });
+
+      // this.allPosts.forEach((post: any) => {
+      //   let validPost = this.selectedTags.every((tag: any) => {
+      //     return post.tags.includes(tag);
+      //   });
+      //   if (validPost) {
+      //     this.filteredPosts.push(post);
+      //   }
+      // });
     } else {
       for (const post of this.allPosts) {
         let string = post.title.trim().split(' ').join(' ').toLowerCase();
+        // console.log(this.searchKey.trim().split(' ').join(' ').toLowerCase());
+
         if (
           string.includes(
             this.searchKey.trim().split(' ').join(' ').toLowerCase()

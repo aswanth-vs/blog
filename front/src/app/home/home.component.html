@@ -5,9 +5,9 @@
     <h1>Welcome to Blog Home!</h1>
     <a class="btn" routerLink="login">Get Started!</a>
   </div>
-  <div class="welcome_image">
+  <!-- <div class="welcome_image">
     <img [src]="'assets/hero1.jpg'" alt="" class="img-fluid" />
-  </div>
+  </div> -->
 </section>
 
 <!-- https://www.vhv.rs/dpng/d/125-1251032_money-blogging-write-a-blog-post-png-transparent.png -->
@@ -42,7 +42,7 @@
               {{ featuredPost.author }}
             </p>
             <p class="card-text text-muted fst-italic">
-              {{ featuredPost.date }}
+              {{ featuredPost.date | date }}
             </p>
             <p class="card-text">
               {{ featuredPost.content.text.slice(0, 220) }}...
@@ -131,7 +131,7 @@
               {{ post.author }}
             </p>
             <p class="card-text text-muted fst-italic">
-              {{ post.date }}
+              {{ post.date | date }}
             </p>
             <p>{{ post.content.text.slice(0, 110) }}...</p>
           </div>
@@ -146,3 +146,9 @@
     <span style="font-size: 1.1em" class="ms-3">Loading</span>
   </div>
 </section>
+
+<footer class="py-5 bg-dark mt-3">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
+  </div>
+</footer>

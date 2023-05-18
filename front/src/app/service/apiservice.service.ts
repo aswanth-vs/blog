@@ -82,4 +82,29 @@ export class ApiserviceService {
   viewpost(id: any) {
     return this.http.get(`${this.BASE_URL}/home/view-post/${id}`);
   }
+
+  viewUserPosts(username: any) {
+    return this.http.get(
+      `${this.BASE_URL}/home/all-posts/${username}`,
+      this.appendToken()
+    );
+  }
+
+  deletePost(id: any) {
+    // const body = {
+    //   uniqueId: id,
+    // };
+    return this.http.delete(
+      `${this.BASE_URL}/home/delete-post/${id}`,
+      this.appendToken()
+    );
+  }
+
+  adminLogin(username: any, password: any) {
+    const body = {
+      username,
+      password,
+    };
+    return this.http.post(`${this.BASE_URL}/home/admin`, body);
+  }
 }

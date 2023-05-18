@@ -67,3 +67,36 @@ exports.viewPost = async (req, res) => {
     res.status(401).json(error);
   }
 };
+exports.getUserPosts = async (req, res) => {
+  // console.log("Heeee", localStorage.getItem("username"));
+  const username = req.params.username;
+  try {
+    const account = await accounts.findOne({ username });
+    if (account) {
+      const allUserposts = await pendingposts.find({ author: username });
+      res.status(200).json(allUserposts);
+    } else {
+      res.status(404).json("Account not Found");
+    }
+  } catch (error) {
+    //error
+    res.status(401).json(error);
+  }
+};
+
+exports.deletePost = async (req, res) => {
+  const id = req.params.id;
+  console.log("ID ", id);
+
+  try {
+    const removedPost = await pendingposts.deleteOne({ uniqueId: id });
+    if (removedPost) {
+      // const allitems = await cartItems.find();
+      res.status(200).json("Post Deleted");
+    } else {
+      res.stats(404).json("Post Not Found");
+    }
+  } catch (error) {
+    res.status(401).json(error);
+  }
+};

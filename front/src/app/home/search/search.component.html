@@ -51,7 +51,13 @@
   <section class="search_result">
     <div class="row" *ngIf="finishLoading">
       <!-- *ngFor="let blog of currentPosts -->
-      <div class="col-md-3" *ngFor="let posts of filteredPosts">
+      <!-- <div class="col-md-3" *ngFor="let posts of filteredPosts"> -->
+      <div
+        class="col-md-3"
+        *ngFor="
+          let posts of allPosts | filter : searchKey : 'title' : selectedTags
+        "
+      >
         <!-- | filter : searchTerm : 'title' : selectedTags -->
         <div class="card card-body bg-light">
           <h2>{{ posts.title }}</h2>

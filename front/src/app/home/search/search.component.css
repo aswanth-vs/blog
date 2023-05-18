@@ -24,6 +24,7 @@
 
 .main {
   height: 80dvh;
+  padding-inline: 10px;
 }
 
 .row {
@@ -52,4 +53,8 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
+}
+
+* {
+  /* overflow-x: hidden; */
 }

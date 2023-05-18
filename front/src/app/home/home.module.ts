@@ -12,6 +12,8 @@ import { ViewPostComponent } from './view-post/view-post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './pipes/filter.pipe';
+import { DeletedirectiveDirective } from './deletedirective.directive';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     ViewPostComponent,
     CreatePostComponent,
     FilterPipe,
+    DeletedirectiveDirective,
+    AdminComponent,
   ],
   imports: [
     CommonModule,

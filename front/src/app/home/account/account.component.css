@@ -1,0 +1,80 @@
+#main {
+  padding-top: 10px;
+  min-height: 100dvh;
+  padding-inline: 20px;
+}
+
+.row {
+  justify-content: center;
+}
+
+.row div {
+  /* height: 200px; */
+}
+
+#user-image {
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.post-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.description {
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+}
+
+.image-container img {
+  object-fit: cover;
+}
+
+.confirm-delete {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-delete > * {
+  margin-inline: 10px;
+}
+
+/* .hideElem {
+  display: none;
+}
+
+#deleteParent {
+  height: 100px;
+  position: relative;
+}
+
+#deleteButton,
+#deleteConfirmDiv {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
+
+#deleteButton {
+  z-index: 10;
+}
+
+@media (max-width: 991px) {
+  .description {
+    display: none;
+  }
+}
+
+@media (max-width: 1290px) {
+}
