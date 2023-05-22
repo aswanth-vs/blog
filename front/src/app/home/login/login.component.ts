@@ -35,7 +35,14 @@ export class LoginComponent implements OnInit {
     //form array
 
     username: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]],
-    password: ['', [Validators.required, Validators.pattern('[0-9a-zA-Z]*')]],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern('[a-zA-Z0-9!@#$%^&*()_+-=]*'),
+        Validators.minLength(8),
+      ],
+    ],
   });
   //  name: ['', [Validators.required, Validators.pattern('[a-zA-Z]*')]],
 
@@ -51,8 +58,9 @@ export class LoginComponent implements OnInit {
           //store token in local storage
           localStorage.setItem('token', result.token);
           localStorage.setItem('username', username);
+          localStorage.setItem('avatar', result.avatar.url);
           setTimeout(() => {
-              window.location.reload();
+            window.location.reload();
             this.loginRouter.navigateByUrl('');
             this.loginSuccessMsg = '';
           }, 3000);

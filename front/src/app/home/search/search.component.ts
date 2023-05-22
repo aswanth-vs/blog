@@ -82,10 +82,7 @@ export class SearchComponent implements OnInit {
       name: 'Finance',
       selected: false,
     },
-    {
-      name: 'Politics',
-      selected: false,
-    },
+
     {
       name: 'Business',
       selected: false,
@@ -94,28 +91,91 @@ export class SearchComponent implements OnInit {
       name: 'Art',
       selected: false,
     },
-    {
-      name: 'Culture',
-      selected: false,
-    },
-    {
-      name: 'Religion',
-      selected: false,
-    },
+
     {
       name: 'Health and Fitness',
       selected: false,
     },
   ];
 
+  // backup
+  // searchFilters: any = [
+  //   {
+  //     name: 'Food',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Travel',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'News',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Technology',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Science',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Lifestyle',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Music',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Sports',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Finance',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Politics',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Business',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Art',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Culture',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Religion',
+  //     selected: false,
+  //   },
+  //   {
+  //     name: 'Health and Fitness',
+  //     selected: false,
+  //   },
+  // ];
+
   constructor(private api: ApiserviceService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.api.searchTerm.subscribe((result: any) => {
-      this.searchTerm = result;
-      console.log(result);
       if (result) {
-        this.showResults = true;
+        this.searchTerm = result;
+        console.log(result);
+        this.searchFilters.forEach((tag: any) => {
+          if (tag.name == result) {
+            tag.selected = true;
+          }
+        });
+        this.showFilter();
+        this.applyFilter();
       }
     });
 

@@ -22,8 +22,13 @@
   background-color: rgb(229, 243, 220);
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .main {
-  height: 80dvh;
+  min-height: 80dvh;
   padding-inline: 10px;
 }
 
@@ -55,6 +60,33 @@
   flex-wrap: wrap;
 }
 
+.search_result {
+  padding-inline: 20px;
+}
+
+.search_result .card {
+  height: 500px;
+}
+
+.card img {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.search_result .row {
+  row-gap: 2em;
+}
+
+.search_result .row > div:hover {
+  transform: translateY(-10px);
+}
+
 * {
   /* overflow-x: hidden; */
+}
+
+@media (max-width: 767px) {
+  .search_result .card {
+    height: auto;
+  }
 }

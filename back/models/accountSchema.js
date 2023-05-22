@@ -16,6 +16,16 @@ const accountSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  avatar: {
+    name: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
+  },
 });
 
 //creating a model to store products

@@ -99,10 +99,6 @@ export class CreatePostComponent implements OnInit {
       selected: false,
     },
     {
-      name: 'Politics',
-      selected: false,
-    },
-    {
       name: 'Business',
       selected: false,
     },
@@ -110,14 +106,7 @@ export class CreatePostComponent implements OnInit {
       name: 'Art',
       selected: false,
     },
-    {
-      name: 'Culture',
-      selected: false,
-    },
-    {
-      name: 'Religion',
-      selected: false,
-    },
+
     {
       name: 'Health and Fitness',
       selected: false,

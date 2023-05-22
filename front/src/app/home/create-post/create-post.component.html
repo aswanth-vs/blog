@@ -2,18 +2,14 @@
   <!-- Banner Image -->
 
   <!-- shows banner Image -->
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center" id="bannerDiv">
     <img
       *ngIf="!bannerimageSrc"
       class="img-fluid rounded"
       src="https://dummyimage.com/600x300/ced4da/6c757d.jpg"
       alt="..."
     />
-    <img
-      [src]="bannerimageSrc"
-      *ngIf="bannerimageSrc"
-      style="height: 300px; width: 600px"
-    />
+    <img [src]="bannerimageSrc" *ngIf="bannerimageSrc" id="bannerIMG" />
   </div>
   <!-- Blog Input Form  -->
   <form [formGroup]="myForm" (ngSubmit)="submitBlog()">

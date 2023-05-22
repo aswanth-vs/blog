@@ -19,6 +19,9 @@ export class AccountComponent implements OnInit {
     if (localStorage.getItem('username')) {
       this.username = localStorage.getItem('username') || '';
     }
+    if (localStorage.getItem('avatar')) {
+      this.avatarURL = localStorage.getItem('avatar') || '';
+    }
     if (!localStorage.getItem('token')) {
       alert('Please Login');
       this.accountRouter.navigateByUrl('login');
@@ -36,6 +39,7 @@ export class AccountComponent implements OnInit {
   }
   username: any = '';
   allPosts: any = [];
+  avatarURL: any = '';
   finishLoading: boolean = false;
   statusShowPosts: boolean = true;
   statusDeletePosts: boolean = false;

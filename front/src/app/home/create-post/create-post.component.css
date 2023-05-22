@@ -3,6 +3,17 @@
   /* padding-inline: 200px; */
 }
 
+/* #bannerDiv {
+  max-width: 500px;
+} */
+
+#bannerIMG {
+  max-width: 800px;
+  /* height: 450px; */
+  aspect-ratio: 16/9;
+  object-fit: contain;
+}
+
 input,
 textarea {
   max-width: 70%;
@@ -35,4 +46,10 @@ textarea {
   /* grid-template-columns: auto; */
   justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 800px) {
+  #bannerIMG {
+    max-width: 90%;
+  }
 }

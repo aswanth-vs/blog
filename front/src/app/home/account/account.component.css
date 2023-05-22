@@ -13,8 +13,7 @@
 }
 
 #user-image {
-  border-radius: 50%;
-  border: 1px solid black;
+  max-width: 200px;
 }
 
 .post-details {
@@ -47,6 +46,15 @@
 
 .confirm-delete > * {
   margin-inline: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.list-group-item a:hover {
+  text-decoration: underline;
 }
 
 /* .hideElem {

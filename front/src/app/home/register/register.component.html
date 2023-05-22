@@ -1,92 +1,134 @@
 <!--  -->
 <section class="main">
-  <div class="grid">
-    <div class="left">
-      <div>
-        <h1>Welcome!</h1>
-        <h2>Please Register to Continue</h2>
-      </div>
+  <div class="text-center text-white">
+    <div>
+      <h1>Welcome!</h1>
+      <h2>Please Register to Continue</h2>
     </div>
-
+  </div>
+  <div class="grid">
     <div
       class="right"
       *ngIf="!registerSuccessMsg"
       style="background-color: aliceblue"
     >
       <div class="registerPending">
-        <form [formGroup]="registerForm" action="" (ngSubmit)="register()">
-          <div class="form-floating mb-3">
-            <input
-              name="name"
-              formControlName="name"
-              type="text"
-              class="form-control"
-              id="floatingName"
-              placeholder="Name"
-              required
-            />
-            <label for="floatingName">Name</label>
+        <div class="row" style="row-gap: 1em">
+          <div class="col-sm-6">
+            <div class="row">
+              <!-- <div> -->
+              <label *ngFor="let avatar of avatars" class="col-6">
+                <input
+                  type="radio"
+                  name="test"
+                  [value]="avatar.name"
+                  (change)="onAvatarSelect($event)"
+                />
+                <img
+                  [src]="avatar.url"
+                  alt="Option 1"
+                  class="img-fluid avatar"
+                />
+              </label>
+              <div class="text-center my-2 fw-bold">Select an Avatar</div>
+              <!-- </div> -->
+            </div>
           </div>
-          <div
-            class="text-danger text-center mb-2"
-            *ngIf="
-              this.registerForm.get('name')?.errors &&
-              this.registerForm.get('name')?.touched
-            "
-          >
-            Invalid Name
+          <div class="col-sm-6">
+            <!--  -->
+            <form [formGroup]="registerForm" action="" (ngSubmit)="register()">
+              <div class="form-floating">
+                <input
+                  name="name"
+                  formControlName="name"
+                  type="text"
+                  class="form-control"
+                  id="floatingName"
+                  placeholder="Name"
+                  required
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom"
+                  data-bs-title="Include only Alphabets"
+                  title="Include only Alphabets"
+                />
+                <label for="floatingName">Name</label>
+              </div>
+              <div
+                class="text-danger text-center mb-2"
+                *ngIf="
+                  this.registerForm.get('name')?.errors &&
+                  this.registerForm.get('name')?.touched
+                "
+              >
+                *Name must only contain Alphabets
+              </div>
+              <!--  -->
+              <div class="form-floating mt-3">
+                <input
+                  type="text"
+                  formControlName="username"
+                  class="form-control"
+                  id="floatingUsername"
+                  placeholder="Username"
+                  required
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom"
+                  title="Include only Alphabets and Numbers"
+                />
+                <label for="floatingUsername">Username</label>
+              </div>
+              <div
+                class="text-danger text-center mb-2"
+                *ngIf="
+                  this.registerForm.get('username')?.errors &&
+                  this.registerForm.get('username')?.touched
+                "
+              >
+                *Username must not Contain Spaces or Special Characters
+              </div>
+              <!--  -->
+              <div class="form-floating mt-3">
+                <input
+                  formControlName="password"
+                  type="password"
+                  class="form-control"
+                  id="floatingPsswd"
+                  placeholder="Password"
+                  required
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom"
+                  data-bs-title="Include only Alphabets"
+                  title="Only Alphabets, Numbers and Special Characters"
+                />
+                <label for="floatingPsswd">Password</label>
+              </div>
+              <div
+                class="text-danger text-center mb-2"
+                *ngIf="
+                  this.registerForm.get('password')?.errors &&
+                  this.registerForm.get('password')?.touched
+                "
+              >
+                *Password must have 8 characters and must only contain
+                Alphabets, Numbers or !@#$%^&*()_+-= Special Characters
+              </div>
+              <!-- error field -->
+              <div></div>
+              <!--  -->
+              <div class="d-flex justify-content-center mt-5">
+                <button
+                  class="btn btn-success"
+                  type="submit"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  data-bs-title="Tooltip on bottom"
+                >
+                  Create Account
+                </button>
+              </div>
+            </form>
           </div>
-          <!--  -->
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              formControlName="username"
-              class="form-control"
-              id="floatingUsername"
-              placeholder="Username"
-              required
-            />
-            <label for="floatingUsername">Username</label>
-          </div>
-          <div
-            class="text-danger text-center mb-2"
-            *ngIf="
-              this.registerForm.get('username')?.errors &&
-              this.registerForm.get('username')?.touched
-            "
-          >
-            Invalid Username
-          </div>
-          <!--  -->
-          <div class="form-floating mb-3">
-            <input
-              formControlName="password"
-              type="password"
-              class="form-control"
-              id="floatingPsswd"
-              placeholder="Password"
-              required
-            />
-            <label for="floatingPsswd">Password</label>
-          </div>
-          <div
-            class="text-danger text-center mb-2"
-            *ngIf="
-              this.registerForm.get('password')?.errors &&
-              this.registerForm.get('password')?.touched
-            "
-          >
-            Invalid Password
-          </div>
-          <!-- error field -->
-          <div></div>
-          <!--  -->
-          <div class="d-flex justify-content-center mt-5">
-            <button class="btn btn-success" type="submit">
-              Create Account
-            </button>
-          </div>
-        </form>
+        </div>
         <!--  -->
         <div class="text-center m-3 fw-bold">OR</div>
         <!--  -->
@@ -98,6 +140,7 @@
         </div>
       </div>
     </div>
+    <!--  -->
     <div *ngIf="registerSuccessMsg" class="right registerSuccess" id="">
       Account Created, Redirecting to Login
       <div class="spinner-border text-light" role="status">

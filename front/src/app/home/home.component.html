@@ -2,7 +2,10 @@
 
 <section id="welcome">
   <div class="welcome_text">
-    <h1>Welcome to Blog Home!</h1>
+    <h1 class="display-4">Welcome to Blog Home!</h1>
+    <p class="lead">
+      Almost all the Posts you see on this website are AI generated
+    </p>
     <a class="btn" routerLink="login">Get Started!</a>
   </div>
   <!-- <div class="welcome_image">
@@ -13,22 +16,9 @@
 <!-- https://www.vhv.rs/dpng/d/125-1251032_money-blogging-write-a-blog-post-png-transparent.png -->
 
 <section class="" id="featured">
-  <div class="row justify-content-between">
+  <div class="row justify-content-center">
     <div class="col-lg-7" *ngIf="featuredLoading">
-      <!-- <div class="card">
-        <img
-          src="https://dummyimage.com/900x400/ced4da/6c757d.jpg"
-          class="card-img-top border img-fluid"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div> -->
+      <h3 class="">Post of the Day</h3>
       <div class="card mb-4">
         <a routerLink="view-post/{{ featuredPost.uniqueId }}"
           ><img
@@ -37,7 +27,9 @@
             [alt]="featuredPost.banner.name"
           />
           <div class="card-body">
-            <h2 class="card-title" id="title">{{ featuredPost.title }}</h2>
+            <h2 class="card-title" id="title">
+              {{ featuredPost.title }}
+            </h2>
             <p>
               {{ featuredPost.author }}
             </p>
@@ -52,75 +44,245 @@
       </div>
     </div>
 
-    <div class="col-lg-7" *ngIf="!featuredLoading">
+    <div
+      class="col-lg-7 d-flex justify-content-center align-items-center"
+      *ngIf="!featuredLoading"
+      style="height: 300px"
+    >
       <div class="spinner-border text-dark" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
-      <span style="font-size: 1.1em" class="ms-3">Loading Featured Post</span>
-    </div>
-
-    <div class="col-lg-4">
-      <!-- Search widget-->
-      <div class="card mb-4">
-        <div class="card-body">
-          <div class="d-flex searchbox">
-            <input
-              class="form-control"
-              type="text"
-              placeholder="Search the Blog"
-              aria-label="Search the Blog"
-              aria-describedby="button-search"
-              #searchText
-            />
-            <button
-              class="btn btn-success"
-              id="button-search"
-              type="button"
-              (click)="redirectToSearch(searchText.value)"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- Categories widget-->
-      <!-- <div class="card mb-4">
-        <div class="card-header">Categories</div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-6">
-              <ul class="list-unstyled mb-0">
-                <li><a href="#!">Web Design</a></li>
-                <li><a href="#!">HTML</a></li>
-                <li><a href="#!">Freebies</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-6">
-              <ul class="list-unstyled mb-0">
-                <li><a href="#!">JavaScript</a></li>
-                <li><a href="#!">CSS</a></li>
-                <li><a href="#!">Tutorials</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- Side widget-->
-      <!-- <div class="card mb-4">
-        <div class="card-header">Side Widget</div>
-        <div class="card-body">
-          You can put anything you want inside of these side widgets. They are
-          easy to use, and feature the Bootstrap 5 card component!
-        </div>
-      </div> -->
+      <span style="font-size: 1.1em" class="ms-3 fs-2"
+        >Loading Post of the Day</span
+      >
     </div>
   </div>
 </section>
 
-<section class="" id="blogsdisplay">
-  <h3>Browse the Blog</h3>
+<!-- Featured -->
+<section class="blogsdisplay">
+  <h2 class="">Featured Posts</h2>
   <div class="row">
-    <div class="col-md-4" *ngFor="let post of allPosts">
+    <!-- slice makes it so that it only shows 3 posts -->
+    <div class="col-md-4" *ngFor="let post of allPosts.slice(0, 3)">
+      <!-- <div class="col-md-4" *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8]"> -->
+      <a routerLink="view-post/{{ post.uniqueId }}">
+        <div class="card">
+          <img [src]="post.banner.data" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p>
+              {{ post.author }}
+            </p>
+            <p class="card-text text-muted fst-italic">
+              {{ post.date | date }}
+            </p>
+            <p>{{ post.content.text.slice(0, 110) }}...</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div *ngIf="!finishLoading" class="mb-5">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span style="font-size: 1.1em" class="ms-3">Loading</span>
+  </div>
+</section>
+
+<hr />
+
+<!-- Group 1 -->
+<section class="blogsdisplay" *ngIf="showGroup1" id="g1">
+  <h3 class="">
+    #
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      Food</button
+    >,
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      Lifestyle</button
+    >,
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      Health and Fitness
+    </button>
+  </h3>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let post of group1">
+      <!-- <div class="col-md-4" *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8]"> -->
+      <a routerLink="view-post/{{ post.uniqueId }}">
+        <div class="card">
+          <img [src]="post.banner.data" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p>
+              {{ post.author }}
+            </p>
+            <p class="card-text text-muted fst-italic">
+              {{ post.date | date }}
+            </p>
+            <p>{{ post.content.text.slice(0, 110) }}...</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div *ngIf="!finishLoading" class="mb-5">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span style="font-size: 1.1em" class="ms-3">Loading</span>
+  </div>
+</section>
+
+<!-- Group 2 -->
+<section class="blogsdisplay" *ngIf="showGroup2">
+  <h3 class="text-muted">
+    #
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      Travel</button
+    >,
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      Music</button
+    >,
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      Art
+    </button>
+  </h3>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let post of group2">
+      <!-- <div class="col-md-4" *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8]"> -->
+      <a routerLink="view-post/{{ post.uniqueId }}">
+        <div class="card">
+          <img [src]="post.banner.data" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p>
+              {{ post.author }}
+            </p>
+            <p class="card-text text-muted fst-italic">
+              {{ post.date | date }}
+            </p>
+            <p>{{ post.content.text.slice(0, 110) }}...</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div *ngIf="!finishLoading" class="mb-5">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span style="font-size: 1.1em" class="ms-3">Loading</span>
+  </div>
+</section>
+
+<!-- Group 3 -->
+<section class="blogsdisplay" *ngIf="showGroup3">
+  <h3 class="text-muted">
+    #
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      News</button
+    >,
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      Technology</button
+    >,
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      Science
+    </button>
+  </h3>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let post of group3">
+      <!-- <div class="col-md-4" *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8]"> -->
+      <a routerLink="view-post/{{ post.uniqueId }}">
+        <div class="card">
+          <img [src]="post.banner.data" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p>
+              {{ post.author }}
+            </p>
+            <p class="card-text text-muted fst-italic">
+              {{ post.date | date }}
+            </p>
+            <p>{{ post.content.text.slice(0, 110) }}...</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div *ngIf="!finishLoading" class="mb-5">
+    <div class="spinner-border text-dark" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span style="font-size: 1.1em" class="ms-3">Loading</span>
+  </div>
+</section>
+
+<!-- Group 4 -->
+<section class="blogsdisplay" *ngIf="showGroup4">
+  <h3 class="text-muted">
+    #
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      Sports</button
+    >,
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      Finance</button
+    >,
+    <button
+      id="redirect_Search"
+      routerLink="search"
+      (click)="gotoSearch($event)"
+    >
+      Business
+    </button>
+  </h3>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let post of group4">
       <!-- <div class="col-md-4" *ngFor="let number of [0, 1, 2, 3, 4, 5, 6, 7, 8]"> -->
       <a routerLink="view-post/{{ post.uniqueId }}">
         <div class="card">

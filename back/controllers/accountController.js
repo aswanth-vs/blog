@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
   //logic to solve register(acno,uname,psswd)
-  const { name, username, password } = req.body;
+  const { name, username, password, avatarSelected } = req.body;
   console.log(req.body);
   try {
     const account = await accounts.findOne({ username: username });
@@ -13,7 +13,7 @@ exports.register = async (req, res) => {
     if (account) {
       res.status(401).json("Account already exists");
     } else {
-      const newAccount = new accounts({ name, username, password });
+      const newAccount = new accounts({ name, username, password, avatar: avatarSelected });
       await newAccount.save();
       res.status(200).json("Account Successfully Created");
     }
@@ -32,6 +32,7 @@ exports.login = async (req, res) => {
     console.log("loginnn");
 
     if (account) {
+      console.log(account);
       const token = jwt.sign(
         {
           username: username,
@@ -41,7 +42,7 @@ exports.login = async (req, res) => {
       //send login success or token?
       //check db.accounts vs await.findOne()
 
-      res.status(200).json({ token });
+      res.status(200).json({ token, avatar: account.avatar });
     } else {
       res.status(400).json("Invalid Account Number or Password");
     }

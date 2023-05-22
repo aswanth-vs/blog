@@ -35,11 +35,12 @@ export class ApiserviceService {
     return options;
   }
 
-  register(name: any, username: any, password: any) {
+  register(name: any, username: any, password: any, avatarSelected: any) {
     const body = {
       name,
       username,
       password,
+      avatarSelected,
     };
     return this.http.post(`${this.BASE_URL}/home/register`, body);
   }

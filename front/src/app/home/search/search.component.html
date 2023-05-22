@@ -48,21 +48,31 @@
     </button>
   </section>
 
-  <section class="search_result">
+  <section class="search_result mt-4">
     <div class="row" *ngIf="finishLoading">
       <!-- *ngFor="let blog of currentPosts -->
       <!-- <div class="col-md-3" *ngFor="let posts of filteredPosts"> -->
       <div
-        class="col-md-3"
+        class="col-md-4"
         *ngFor="
-          let posts of allPosts | filter : searchKey : 'title' : selectedTags
+          let post of allPosts | filter : searchKey : 'title' : selectedTags
         "
       >
-        <!-- | filter : searchTerm : 'title' : selectedTags -->
-        <div class="card card-body bg-light">
-          <h2>{{ posts.title }}</h2>
-          <p></p>
-        </div>
+        <a routerLink="view-post/{{ post.uniqueId }}">
+          <div class="card">
+            <img [src]="post.banner.data" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p>
+                {{ post.author }}
+              </p>
+              <p class="card-text text-muted fst-italic">
+                {{ post.date | date }}
+              </p>
+              <p>{{ post.content.text.slice(0, 110) }}...</p>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
     <div *ngIf="!finishLoading" class="m-5 d-flex justify-content-center">
@@ -73,3 +83,9 @@
     </div>
   </section>
 </section>
+
+<footer class="py-5 bg-dark mt-5">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
+  </div>
+</footer>

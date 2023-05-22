@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-3 text-center left">
       <img
-        src="https://robohash.org/hicveldicta.png"
+        [src]="avatarURL"
         alt="profile picture"
         id="user-image"
         class="img-fluid"
@@ -50,49 +50,50 @@
       <!--  -->
       <ul class="list-group list-group-flush">
         <li class="list-group-item" *ngFor="let post of allPosts">
-          <div class="card mb-3">
-            <div class="row post-details no-gutters">
-              <div class="col-lg-4 col-sm-6 image-container">
-                <img
-                  [src]="post.banner.data"
-                  class="card-img img-fluid"
-                  alt="post-banner-image"
-                />
-              </div>
-              <div class="col-lg-8 col-sm-6 details-container">
-                <div class="card-body">
-                  <h5 class="card-title fw-normal">{{ post.title }}</h5>
-                  <p class="card-text description">
-                    {{ post.content.text.slice(0, 110) }}...
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted">{{ post.date | date }} </small>
-                  </p>
-                  <p *ngIf="adminLoggedIn">
-                    {{ post.author }}
-                  </p>
+          <a routerLink="view-post/{{ post.uniqueId }}">
+            <div class="card mb-3">
+              <div class="row post-details no-gutters">
+                <div class="col-lg-4 col-sm-6 image-container">
+                  <img
+                    [src]="post.banner.data"
+                    class="card-img img-fluid"
+                    alt="post-banner-image"
+                  />
+                </div>
+                <div class="col-lg-8 col-sm-6 details-container">
+                  <div class="card-body">
+                    <h5 class="card-title fw-normal">{{ post.title }}</h5>
+                    <p class="card-text description">
+                      {{ post.content.text.slice(0, 110) }}...
+                    </p>
+                    <p class="card-text">
+                      <small class="text-muted">{{ post.date | date }} </small>
+                    </p>
+                    <p *ngIf="adminLoggedIn">
+                      {{ post.author }}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- delete post -->
-            <!-- <div  > -->
+              <!-- delete post -->
+              <!-- <div  > -->
 
-            <!-- </div> -->
-          </div>
-          <!--  -->
-          <!-- <div id="deleteParent"> -->
-          <button
-            class="btn btn-danger mt-1 mb-4"
-            style="width: 100%"
-            (click)="deletePostInit(post.uniqueId, post.title)"
-            *ngIf="statusDeletePosts"
-            data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop2"
-          >
-            Delete <i class="fa fa-trash"></i>
-          </button>
-          <!-- delete confirm -->
-          <!-- <div
+              <!-- </div> -->
+            </div>
+            <!--  -->
+            <!-- <div id="deleteParent"> -->
+            <button
+              class="btn btn-danger mt-1 mb-4"
+              style="width: 100%"
+              (click)="deletePostInit(post.uniqueId, post.title)"
+              *ngIf="statusDeletePosts"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop2"
+            >
+              Delete <i class="fa fa-trash"></i>
+            </button>
+            <!-- delete confirm -->
+            <!-- <div
               id="deleteConfirmDiv"
               class="confirm-delete w3-animate-right hideElem"
             >
@@ -107,8 +108,9 @@
                 No
               </button>
             </div> -->
-          <!-- </div> -->
-          <!--  -->
+            <!-- </div> -->
+            <!--  -->
+          </a>
         </li>
       </ul>
     </div>
